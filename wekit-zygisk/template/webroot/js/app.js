@@ -39,7 +39,7 @@ async function runCheckedCommand(commandLine, operation) {
     result = await exec(commandLine);
   } catch (error) {
     lastCommandFailure = `$ ${commandLine}\nbridge error: ${error?.stack || error}`;
-    console.error("[WeKit WebUI] command bridge failure", {
+    console.error("[XXX WebUI] command bridge failure", {
       commandLine,
       error,
     });
@@ -48,7 +48,7 @@ async function runCheckedCommand(commandLine, operation) {
 
   const exitCodeValue = Number(result.errno);
   const exitCode = Number.isFinite(exitCodeValue) ? exitCodeValue : -1;
-  console.info("[WeKit WebUI] command result", {
+  console.info("[XXX WebUI] command result", {
     commandLine,
     exitCode,
     stdout: result.stdout,
@@ -195,7 +195,7 @@ async function loadDeviceLog() {
       `=== WebUI 日志 ===\n${output || `<empty; exit ${exitCode}>`}`,
     );
     deviceLog.textContent = sections.join("\n\n");
-    console.info("[WeKit WebUI] device log result", {
+    console.info("[XXX WebUI] device log result", {
       commandLine,
       exitCode,
       stdout: result.stdout,
@@ -208,7 +208,7 @@ async function loadDeviceLog() {
     ]
       .filter(Boolean)
       .join("\n\n");
-    console.error("[WeKit WebUI] cannot read device log", error);
+    console.error("[XXX WebUI] cannot read device log", error);
   } finally {
     refreshLogButton.disabled = false;
     deviceLogLoading = false;
@@ -218,7 +218,7 @@ async function loadDeviceLog() {
 async function showCommandFailure(error, fallback) {
   const message = error?.message || fallback;
   showToast(`${message}，详见 WebUI 日志`, true);
-  console.error("[WeKit WebUI] operation failed", error);
+  console.error("[XXX WebUI] operation failed", error);
   diagnostics.open = true;
   await loadDeviceLog();
 }
@@ -352,7 +352,7 @@ async function initializeWebUi() {
   try {
     await configCommand("check-logcat");
   } catch (error) {
-    console.error("[WeKit WebUI] cannot check logcat size", error);
+    console.error("[XXX WebUI] cannot check logcat size", error);
     showToast("无法检查导出日志大小", true);
   }
   await refreshTargets();

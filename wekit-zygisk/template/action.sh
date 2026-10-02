@@ -7,14 +7,14 @@ CONFIG_SCRIPT=$MODDIR/config.sh
 export PATH=/system/bin:/system/xbin:/vendor/bin:/product/bin:/apex/com.android.runtime/bin:$PATH
 
 if [ ! -x "$CONFIG_SCRIPT" ]; then
-  echo "Unable to read WeKit Zygisk targets: $CONFIG_SCRIPT is unavailable" >&2
+  echo "Unable to read XXX Zygisk targets: $CONFIG_SCRIPT is unavailable" >&2
   exit 1
 fi
 
 target_rows=$("$CONFIG_SCRIPT" list)
 list_status=$?
 if [ "$list_status" -ne 0 ]; then
-  echo "Unable to read WeKit Zygisk targets (exit $list_status)" >&2
+  echo "Unable to read XXX Zygisk targets (exit $list_status)" >&2
   exit "$list_status"
 fi
 
@@ -41,7 +41,7 @@ selected_target=$(printf '%s\n' "$target_rows" | awk -F '\t' '
 ')
 
 if [ -z "$selected_target" ]; then
-  echo "No enabled WeKit Zygisk targets. Enable one in the module WebUI first." >&2
+  echo "No enabled XXX Zygisk targets. Enable one in the module WebUI first." >&2
   exit 1
 fi
 

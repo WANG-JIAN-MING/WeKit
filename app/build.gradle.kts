@@ -84,7 +84,7 @@ android {
     ndkVersion = libs.versions.ndk.get()
 
     defaultConfig {
-        applicationId = libs.versions.namespace.get()
+        applicationId = libs.versions.applicationId.get()
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
 

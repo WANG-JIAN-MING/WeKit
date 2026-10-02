@@ -54,6 +54,8 @@ pythonRuntimePython = "3.13"
 # noinspection UnusedVersionCatalogEntry
 namespace = "dev.ujhhgtg.wekit"
 # noinspection UnusedVersionCatalogEntry
+applicationId = "com.wjm.weixin"
+# noinspection UnusedVersionCatalogEntry
 minSdk = "28"
 # noinspection UnusedVersionCatalogEntry
 targetSdk = "37"
