@@ -30,6 +30,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     if: |
       github.event_name == 'workflow_dispatch' ||
       (
@@ -156,10 +157,42 @@ jobs:
             echo "No repository signing key configured; generated a temporary release key"
           fi
 
+      - name: Build native inputs (arm64-v8a)
+        timeout-minutes: 45
+        run: |
+          set -euxo pipefail
+          cargo xtask build --native-only --abi arm64-v8a
+
       - name: Build standard Release (arm64-v8a)
+        timeout-minutes: 60
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./x build --release --flavor standard --abi arm64-v8a
+          GRADLE_OPTS: >-
+            -Dorg.gradle.daemon=false
+            -Dorg.gradle.workers.max=2
+            -Dorg.gradle.logging.level=info
+        run: |
+          set -euxo pipefail
+          ./gradlew --no-daemon --stacktrace --info assembleStandardRelease
+
+      - name: Dump build diagnostics
+        if: failure()
+        run: |
+          set +e
+          df -h /
+          free -h
+          ps -ef | head -80
+          find app/build -maxdepth 4 -type f \( -name '*.log' -o -name '*.txt' \) -print 2>/dev/null | head -80
+
+      - name: Upload build diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: wekit-build-diagnostics
+          path: |
+            app/build/reports/**
+            app/build/outputs/logs/**
+          if-no-files-found: ignore
 
       - name: Collect standard ARM64 APK
         run: |
