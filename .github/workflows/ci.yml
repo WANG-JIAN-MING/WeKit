@@ -169,11 +169,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GRADLE_OPTS: >-
             -Dorg.gradle.daemon=false
-            -Dorg.gradle.workers.max=2
-            -Dorg.gradle.logging.level=info
+            -Dorg.gradle.workers.max=1
+            -Dorg.gradle.caching=false
+            -Dkotlin.compiler.execution.strategy=in-process
+            -Dkotlin.daemon.jvmargs=-Xmx1024m
         run: |
           set -euxo pipefail
-          ./gradlew --no-daemon --stacktrace --info assembleStandardRelease
+          ./gradlew --no-daemon --no-build-cache --stacktrace --console=plain \
+            -Dorg.gradle.jvmargs="-Xmx2560m -XX:MaxMetaspaceSize=1024m -Dfile.encoding=UTF-8" \
+            -Dorg.gradle.workers.max=1 \
+            -Dkotlin.compiler.execution.strategy=in-process \
+            assembleStandardRelease
 
       - name: Dump build diagnostics
         if: failure()
