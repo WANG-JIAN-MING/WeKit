@@ -31,12 +31,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: |
-      (github.event_name == 'workflow_dispatch' && github.repository == 'Ujhhgtg/WeKit-Dev') ||
+      github.event_name == 'workflow_dispatch' ||
       (
-        !startsWith(github.event.head_commit.message, '[skip ci]') && 
+        !startsWith(github.event.head_commit.message, '[skip ci]') &&
         (
           github.event_name == 'pull_request' ||
-          (github.repository == 'Ujhhgtg/WeKit-Dev' && github.ref == 'refs/heads/master')
+          (github.repository == 'WANG-JIAN-MING/wx' && github.ref == 'refs/heads/master')
         )
       )
     steps:
@@ -122,52 +122,67 @@ jobs:
           uv run --no-sync --project wekit-zygisk python wekit-zygisk/native/tests/arm64_relocation.py
           ./x i18n-check
 
-      - name: Decode keystore
-        if: github.event_name != 'pull_request'
+      - name: Prepare signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD_SECRET: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS_SECRET: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD_SECRET: ${{ secrets.KEY_PASSWORD }}
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > $RUNNER_TEMP/wekit-keystore.jks
+          set -euo pipefail
+          keystore="$RUNNER_TEMP/wekit-release.jks"
+          if [[ -n "$KEYSTORE_BASE64" && -n "$KEYSTORE_PASSWORD_SECRET" &&
+                -n "$KEY_ALIAS_SECRET" && -n "$KEY_PASSWORD_SECRET" ]]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$keystore"
+            {
+              echo "WEKIT_KEYSTORE_FILE=$keystore"
+              echo "WEKIT_KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD_SECRET"
+              echo "WEKIT_KEY_ALIAS=$KEY_ALIAS_SECRET"
+              echo "WEKIT_KEY_PASSWORD=$KEY_PASSWORD_SECRET"
+            } >> "$GITHUB_ENV"
+            echo "Using repository signing key"
+          else
+            password="temporary-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+            keytool -genkeypair -noprompt \
+              -keystore "$keystore" -storepass "$password" -keypass "$password" \
+              -alias release -keyalg RSA -keysize 2048 -validity 36500 \
+              -dname "CN=XXX Release" >/dev/null
+            {
+              echo "WEKIT_KEYSTORE_FILE=$keystore"
+              echo "WEKIT_KEYSTORE_PASSWORD=$password"
+              echo "WEKIT_KEY_ALIAS=release"
+              echo "WEKIT_KEY_PASSWORD=$password"
+            } >> "$GITHUB_ENV"
+            echo "No repository signing key configured; generated a temporary release key"
+          fi
 
-      - name: Build Release (Signed)
-        if: github.event_name != 'pull_request'
+      - name: Build standard Release (arm64-v8a)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WEKIT_KEYSTORE_FILE: ${{ runner.temp }}/wekit-keystore.jks
-          WEKIT_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          WEKIT_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          WEKIT_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: ./x build --release
+        run: ./x build --release --flavor standard --abi arm64-v8a
 
-      - name: Build Release (Unsigned)
-        if: github.event_name == 'pull_request'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./x build --release
-
-      - name: Collect APKs
+      - name: Collect standard ARM64 APK
         run: |
           set -euo pipefail
           mkdir -p dist/apk
+          apk="app/build/outputs/apk/standard/release/app-standard-release.apk"
+          uv run --no-sync --project wekit-zygisk python .github/scripts/verify-dual-apk.py --check-installer "$apk"
+          WEKIT_TEST_APK="$GITHUB_WORKSPACE/$apk" cargo test -p wekit-zygisk --lib apk::tests::reads_built_apk -- --ignored
+          cp -v "$apk" dist/apk/
+          echo "Collected APK:"
+          ls -l dist/apk/app-standard-release.apk
 
-          for flavor in standard legacy; do
-            apk="app/build/outputs/apk/$flavor/release/app-$flavor-release.apk"
-            uv run --no-sync --project wekit-zygisk python .github/scripts/verify-dual-apk.py --check-installer "$apk"
-            WEKIT_TEST_APK="$GITHUB_WORKSPACE/$apk" cargo test -p wekit-zygisk --lib apk::tests::reads_built_apk -- --ignored
-
-            cp -v "$apk" dist/apk/
-          done
-
-          echo "Collected APKs:"
-          ls -1 dist/apk
-
-      - name: Collect mappings
+      - name: Collect standard mapping
         run: |
-          # One mapping.txt per flavor; rename per flavor to avoid collisions.
+          set -euo pipefail
           mkdir -p dist/mapping
-          for m in app/build/outputs/mapping/*/mapping.txt; do
-            flavorDir=$(basename "$(dirname "$m")")   # e.g. standardRelease
-            cp -v "$m" "dist/mapping/mapping-${flavorDir}.txt"
-          done
-          ls -1 dist/mapping || echo "(no mappings — unsigned PR build without minify?)"
+          mapping="app/build/outputs/mapping/standardRelease/mapping.txt"
+          if [[ -f "$mapping" ]]; then
+            cp -v "$mapping" dist/mapping/mapping-standardRelease.txt
+          else
+            echo "No standard Release mapping generated"
+          fi
+          ls -la dist/mapping
 
       - name: Upload Release APKs
         uses: actions/upload-artifact@v7
