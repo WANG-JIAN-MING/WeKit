@@ -119,7 +119,7 @@ jobs:
 
           rg -n "^agp = \"$MAIN_AGP\"$" \
             third_party/lspeciallyparanoid/gradle/libs.versions.toml
-          rg -n "com\.android\.library\") version \"$MAIN_AGP\"" \
+          rg -n -F "id(\"com.android.library\") version \"$MAIN_AGP\"" \
             third_party/lspeciallyparanoid/build.gradle.kts
 
       - name: Build standard Release
