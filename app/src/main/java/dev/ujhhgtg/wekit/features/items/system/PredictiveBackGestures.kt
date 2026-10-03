@@ -76,8 +76,8 @@ object PredictiveBackGestures : ApiFeature() {
      * host ActivityInfo receives the predictive-back flags for the Activity it will instantiate.
      */
     private fun isModuleActivity(info: ActivityInfo, intent: Intent? = null): Boolean =
-        info.name?.startsWith(PackageNames.MODULE) == true ||
-            intent?.component?.className?.startsWith(PackageNames.MODULE) == true
+        info.name?.startsWith(PackageNames.MODULE_CLASS_PREFIX) == true ||
+            intent?.component?.className?.startsWith(PackageNames.MODULE_CLASS_PREFIX) == true
 
     private fun applyFlag(info: ActivityInfo) {
         val field = info.reflekt().firstField { name = "privateFlags" }

@@ -164,7 +164,7 @@ object ActivityProxy {
         private val NON_PROXY_ACTIVITIES = listOf("MainActivity", "PipVoipActivity")
 
         fun isModuleProxyActivity(className: String?): Boolean =
-            className?.startsWith(PackageNames.MODULE) == true &&
+            className?.startsWith(PackageNames.MODULE_CLASS_PREFIX) == true &&
                 NON_PROXY_ACTIVITIES.none { className.contains(it) }
     }
 
