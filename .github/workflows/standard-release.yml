@@ -103,6 +103,25 @@ jobs:
           uv sync --locked --managed-python --project wekit-zygisk --all-groups
           echo "$GITHUB_WORKSPACE/wekit-zygisk/.venv/bin" >> "$GITHUB_PATH"
 
+      - name: Align LSParanoid AGP with the main build
+        run: |
+          set -euo pipefail
+          MAIN_AGP=$(sed -n 's/^agp = "\(.*\)"/\1/p' gradle/libs.versions.toml)
+          test -n "$MAIN_AGP"
+
+          # LSParanoid 0.13.3 is consumed as a composite build. Its published
+          # source currently declares AGP 9.4.1, while this project is pinned
+          # to AGP 9.3.3. Align both declarations before Gradle configuration.
+          sed -i -E "s/^agp = \"[0-9.]+\"$/agp = \"$MAIN_AGP\"/" \
+            third_party/lspeciallyparanoid/gradle/libs.versions.toml
+          sed -i -E "s/(com\.android\.library\") version \"[0-9.]+\"/\1 version \"$MAIN_AGP\"/" \
+            third_party/lspeciallyparanoid/build.gradle.kts
+
+          rg -n "^agp = \"$MAIN_AGP\"$" \
+            third_party/lspeciallyparanoid/gradle/libs.versions.toml
+          rg -n "com\.android\.library\") version \"$MAIN_AGP\"" \
+            third_party/lspeciallyparanoid/build.gradle.kts
+
       - name: Build standard Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
