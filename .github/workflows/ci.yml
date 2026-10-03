@@ -31,13 +31,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: |
-      (github.event_name == 'workflow_dispatch' && github.repository == 'Ujhhgtg/WeKit-Dev') ||
+      !startsWith(github.event.head_commit.message, '[skip ci]') &&
       (
-        !startsWith(github.event.head_commit.message, '[skip ci]') && 
-        (
-          github.event_name == 'pull_request' ||
-          (github.repository == 'Ujhhgtg/WeKit-Dev' && github.ref == 'refs/heads/master')
-        )
+        github.event_name == 'pull_request' ||
+        github.event_name == 'workflow_dispatch' ||
+        github.ref == 'refs/heads/master'
       )
     steps:
       - name: Checkout
@@ -122,26 +120,39 @@ jobs:
           uv run --no-sync --project wekit-zygisk python wekit-zygisk/native/tests/arm64_relocation.py
           ./x i18n-check
 
-      - name: Decode keystore
+      - name: Prepare release signing
         if: github.event_name != 'pull_request'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > $RUNNER_TEMP/wekit-keystore.jks
+          set -euo pipefail
+          if [[ -n "$KEYSTORE_BASE64" && -n "$KEYSTORE_PASSWORD" && \
+                -n "$KEY_ALIAS" && -n "$KEY_PASSWORD" ]]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/wekit-keystore.jks"
+            {
+              echo "WEKIT_KEYSTORE_FILE=$RUNNER_TEMP/wekit-keystore.jks"
+              echo "WEKIT_KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD"
+              echo "WEKIT_KEY_ALIAS=$KEY_ALIAS"
+              echo "WEKIT_KEY_PASSWORD=$KEY_PASSWORD"
+            } >> "$GITHUB_ENV"
+          else
+            echo 'Release signing secrets are incomplete; using the project build.gradle fallback.'
+          fi
 
       - name: Build Release (Signed)
         if: github.event_name != 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WEKIT_KEYSTORE_FILE: ${{ runner.temp }}/wekit-keystore.jks
-          WEKIT_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          WEKIT_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          WEKIT_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: ./x build --release
+        run: ./gradlew assembleRelease
 
       - name: Build Release (Unsigned)
         if: github.event_name == 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./x build --release
+        run: ./gradlew assembleRelease
 
       - name: Collect APKs
         run: |
