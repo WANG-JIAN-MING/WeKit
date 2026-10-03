@@ -6,7 +6,7 @@ object PackageNames {
 
     const val WECHAT = "com.tencent.mm"
     const val MODULE = BuildConfig.APPLICATION_ID
-    val MODULE_CLASS_PREFIX = BuildConfig::class.java.name.substringBeforeLast('.') + "."
+    const val MODULE_CLASS_PREFIX = "dev.ujhhgtg.wekit."
 
     @Suppress("NOTHING_TO_INLINE")
     @JvmStatic
