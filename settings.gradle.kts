@@ -6,9 +6,7 @@ enableFeaturePreview("NO_IMPLICIT_LOOKUP_IN_PARENT_PROJECTS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
-    includeBuild("third_party/lspeciallyparanoid")
     repositories {
-        mavenLocal { content { includeGroup("dev.ujhhgtg.lsparanoid") } }
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -25,7 +23,6 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenLocal { content { includeGroup("dev.ujhhgtg.lsparanoid") } }
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -74,7 +71,6 @@ rootProject.name = "wekit"
 
 // Composite build: scripta code editor (not published to Maven Central; keep its own
 // toolchain, plugins and version catalog).
-includeBuild("third_party/lspeciallyparanoid")
 includeBuild("libs/common/scripta")
 
 include(
