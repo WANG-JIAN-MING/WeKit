@@ -12,7 +12,7 @@
     </queries>
 
     <application
-        android:name=".application.ModuleApplication"
+        android:name="dev.ujhhgtg.wekit.application.ModuleApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:description="@string/app_description"
@@ -24,7 +24,7 @@
         android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar">
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="dev.ujhhgtg.wekit.activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar">
             <intent-filter>
@@ -40,7 +40,7 @@
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:targetActivity=".activity.MainActivity">
+            android:targetActivity="dev.ujhhgtg.wekit.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,52 +48,37 @@
         </activity-alias>
 
         <activity
-            android:name=".activity.TransparentActivity"
+            android:name="dev.ujhhgtg.wekit.activity.TransparentActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <activity
-            android:name=".activity.PipVoipActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
-            android:taskAffinity="com.wjm.weixin.voip_pip"
-            android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar" />
-
-        <receiver
-            android:name=".activity.PipVoipActionReceiver"
-            android:exported="false" />
-
-        <activity
-            android:name=".activity.settings.SettingsActivity"
+            android:name="dev.ujhhgtg.wekit.activity.settings.SettingsActivity"
             android:exported="true"
             android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar" />
 
         <activity
-            android:name=".activity.agent.WeAgentSettingsActivity"
+            android:name="dev.ujhhgtg.wekit.activity.agent.WeAgentSettingsActivity"
             android:exported="true"
             android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar" />
 
         <activity
-            android:name=".features.items.chat.ReadReceiptsSettingsActivity"
+            android:name="dev.ujhhgtg.wekit.features.items.chat.ReadReceiptsSettingsActivity"
             android:exported="true"
             android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar" />
 
         <activity
-            android:name=".features.items.system.QrCodeRecordSettingsActivity"
+            android:name="dev.ujhhgtg.wekit.features.items.system.QrCodeRecordSettingsActivity"
             android:exported="true"
             android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar" />
 
         <activity
-            android:name=".activity.settings.ExtensionsSettingsActivity"
+            android:name="dev.ujhhgtg.wekit.activity.settings.ExtensionsSettingsActivity"
             android:exported="true"
             android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar" />
 
         <activity
-            android:name=".activity.scripting_python.PythonScriptsSettingsActivity"
+            android:name="dev.ujhhgtg.wekit.activity.scripting_python.PythonScriptsSettingsActivity"
             android:exported="true"
             android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar" />
 
