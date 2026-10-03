@@ -32,7 +32,13 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
-          packages: platform-tools platforms;android-37
+          packages: platform-tools
+
+      - name: Install project Android SDK platform
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager --channel=3 "platforms;android-37"
 
       - name: Build Release
         run: ./gradlew assembleRelease
