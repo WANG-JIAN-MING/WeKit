@@ -1,0 +1,149 @@
+name: Standard Release APK
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: standard-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-standard-release:
+    name: Build standard Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Free disk space
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/boost
+          sudo apt-get clean
+          df -h /
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Set up Rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: aarch64-linux-android
+
+      - name: Set up uv and Python 3.12
+        uses: astral-sh/setup-uv@v10.0.1
+        with:
+          version: '0.12.8'
+          python-version: '3.12'
+          enable-cache: false
+
+      - name: Grant execute permission
+        run: chmod +x gradlew x
+
+      - name: Install Android NDK and system dependencies
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gcc-multilib unzip
+
+          NDK_VERSION=$(sed -n 's/^ndk = "\(.*\)"/\1/p' gradle/libs.versions.toml)
+          MIN_SDK=$(sed -n 's/^minSdk = "\(.*\)"/\1/p' gradle/libs.versions.toml)
+
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "platforms;android-37" "ndk;$NDK_VERSION"
+
+          NDK_BIN="$ANDROID_HOME/ndk/$NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          test -x "$NDK_BIN/aarch64-linux-android${MIN_SDK}-clang"
+          test -x "$NDK_BIN/llvm-strip"
+
+      - name: Prepare PRoot cache key
+        id: proot_cache_inputs
+        run: |
+          set -euo pipefail
+          echo "commit=$(git -C third_party/proot-static rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "ndk=$(sed -n 's/^ndk = "\(.*\)"/\1/p' gradle/libs.versions.toml)" >> "$GITHUB_OUTPUT"
+          echo "min_sdk=$(sed -n 's/^minSdk = "\(.*\)"/\1/p' gradle/libs.versions.toml)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache PRoot build
+        uses: actions/cache@v6
+        with:
+          path: target/proot-static
+          key: proot-${{ runner.os }}-${{ runner.arch }}-${{ steps.proot_cache_inputs.outputs.commit }}-${{ steps.proot_cache_inputs.outputs.ndk }}-${{ steps.proot_cache_inputs.outputs.min_sdk }}-${{ hashFiles('patches/proot/android-ptrace-events.patch', 'third_party/proot-static/tools/build-static-aarch64.sh') }}
+          restore-keys: |
+            proot-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+          workspaces: . -> target
+
+      - name: Install native build dependencies
+        run: |
+          set -euo pipefail
+          uv sync --locked --managed-python --project wekit-zygisk --all-groups
+          echo "$GITHUB_WORKSPACE/wekit-zygisk/.venv/bin" >> "$GITHUB_PATH"
+
+      - name: Build standard Release
+        env:
+          # When all four secrets exist, the Gradle script uses the original
+          # project's release signing path. Otherwise its existing debug-signing
+          # fallback still produces the standard Release APK.
+          WEKIT_KEYSTORE_FILE: ${{ runner.temp }}/wekit-keystore.jks
+          WEKIT_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          WEKIT_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          WEKIT_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          WEKIT_KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          set -euo pipefail
+          if [[ -n "$WEKIT_KEYSTORE_BASE64" && \
+                -n "$WEKIT_KEYSTORE_PASSWORD" && \
+                -n "$WEKIT_KEY_ALIAS" && \
+                -n "$WEKIT_KEY_PASSWORD" ]]; then
+            printf '%s' "$WEKIT_KEYSTORE_BASE64" | base64 --decode > "$WEKIT_KEYSTORE_FILE"
+          else
+            unset WEKIT_KEYSTORE_FILE WEKIT_KEYSTORE_PASSWORD WEKIT_KEY_ALIAS WEKIT_KEY_PASSWORD
+            echo "Signing secrets are not complete; using the project's existing fallback signing configuration."
+          fi
+
+          ./x build --flavor standard --release
+
+      - name: Verify standard Release APK
+        run: |
+          set -euo pipefail
+          APK="app/build/outputs/apk/standard/release/app-standard-release.apk"
+          test -s "$APK"
+
+          unzip -Z1 "$APK" > "$RUNNER_TEMP/apk-entries.txt"
+          if rg -q '^lib/(armeabi-v7a|x86|x86_64)/' "$RUNNER_TEMP/apk-entries.txt"; then
+            echo 'APK contains a forbidden non-arm64 ABI.' >&2
+            exit 1
+          fi
+          rg -q '^lib/arm64-v8a/' "$RUNNER_TEMP/apk-entries.txt"
+
+          echo "Release APK: $APK"
+          sha256sum "$APK"
+
+      - name: Upload standard Release APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-standard-release
+          path: app/build/outputs/apk/standard/release/app-standard-release.apk
+          if-no-files-found: error
+          retention-days: 30
