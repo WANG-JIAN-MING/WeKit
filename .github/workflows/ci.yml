@@ -147,7 +147,7 @@ jobs:
             keytool -genkeypair -noprompt \
               -keystore "$keystore" -storepass "$password" -keypass "$password" \
               -alias release -keyalg RSA -keysize 2048 -validity 36500 \
-              -dname "CN=XXX Release" >/dev/null
+              -dname "CN=X Release" >/dev/null
             {
               echo "WEKIT_KEYSTORE_FILE=$keystore"
               echo "WEKIT_KEYSTORE_PASSWORD=$password"

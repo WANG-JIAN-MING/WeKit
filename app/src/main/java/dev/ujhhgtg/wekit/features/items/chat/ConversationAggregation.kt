@@ -140,7 +140,7 @@ object ConversationAggregation : ClickableFeature(),
     // SelectConversationUI#doClickUser(username) — the single entry point for all conversation
     // taps in the "share to conversation" picker. WeChat only intercepts known virtual usernames
     // ("conversationboxservice", "opencustomerservicemsg") before forwarding to its share logic.
-    // Our folder rows (wekit_folder_XXX) pass those guards and reach the share machinery, which
+    // Our folder rows (wekit_folder_<id>) pass those guards and reach the share machinery, which
     // tries to open a chat thread for a non-existent contact → crash.
     private val methodSelectConversationDoClickUser by dexMethod(allowFailure = true) {
         matcher {
@@ -154,7 +154,7 @@ object ConversationAggregation : ClickableFeature(),
     // forwarding routes every row tap through its list item-click listener cj5.g2#g(View, item, int)
     // (interface in5.u). A tap on a normal conversation dispatches wi5.c0(listOf(username)) to the
     // state center, which sets the "Select_Conv_User" result extra and finishes. Our folder rows
-    // (wekit_folder_XXX) reach that same path with a non-existent username → crash downstream.
+    // (wekit_folder_<id>) reach that same path with a non-existent username → crash downstream.
     // We match the two concrete listeners (main list + search results) by their unique log tags.
     private val methodMvvmMainListItemClick by dexMethod {
         matcher {
