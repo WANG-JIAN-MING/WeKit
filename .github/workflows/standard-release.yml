@@ -112,15 +112,29 @@ jobs:
           # LSParanoid 0.13.3 is consumed as a composite build. Its published
           # source currently declares AGP 9.4.1, while this project is pinned
           # to AGP 9.3.3. Align both declarations before Gradle configuration.
-          sed -i -E "s/^agp = \"[0-9.]+\"$/agp = \"$MAIN_AGP\"/" \
-            third_party/lspeciallyparanoid/gradle/libs.versions.toml
-          sed -i -E "s/(com\.android\.library\") version \"[0-9.]+\"/\1 version \"$MAIN_AGP\"/" \
-            third_party/lspeciallyparanoid/build.gradle.kts
+          python3 - "$MAIN_AGP" <<'PY'
+          import pathlib
+          import sys
 
-          rg -n "^agp = \"$MAIN_AGP\"$" \
-            third_party/lspeciallyparanoid/gradle/libs.versions.toml
-          rg -n -F "id(\"com.android.library\") version \"$MAIN_AGP\"" \
-            third_party/lspeciallyparanoid/build.gradle.kts
+          agp = sys.argv[1]
+          catalog = pathlib.Path("third_party/lspeciallyparanoid/gradle/libs.versions.toml")
+          build_file = pathlib.Path("third_party/lspeciallyparanoid/build.gradle.kts")
+
+          catalog_text = catalog.read_text()
+          build_text = build_file.read_text()
+          catalog_text = catalog_text.replace('agp = "9.4.1"', f'agp = "{agp}"', 1)
+          build_text = build_text.replace(
+              'id("com.android.library") version "9.4.1" apply false',
+              f'id("com.android.library") version "{agp}" apply false',
+              1,
+          )
+          catalog.write_text(catalog_text)
+          build_file.write_text(build_text)
+
+          assert f'agp = "{agp}"' in catalog.read_text()
+          assert f'id("com.android.library") version "{agp}" apply false' in build_file.read_text()
+          print(f"LSParanoid AGP aligned to {agp}")
+          PY
 
       - name: Build standard Release
         env:
