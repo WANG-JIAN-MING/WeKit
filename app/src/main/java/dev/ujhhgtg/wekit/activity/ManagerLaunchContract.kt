@@ -27,7 +27,7 @@ object ManagerLaunchContract {
 @Suppress("DEPRECATION")
 fun openLsposedManager(activity: Activity) {
     val intent = Intent().apply {
-        setClassName(PackageNames.MODULE, "${PackageNames.MODULE}.activity.MainActivity")
+        setClassName(PackageNames.MODULE, "dev.ujhhgtg.wekit.activity.MainActivity")
         action = ManagerLaunchContract.ACTION_OPEN_LSPOSED_MANAGER
     }
     activity.startActivityForResult(intent, REQUEST_OPEN_LSPOSED_MANAGER)

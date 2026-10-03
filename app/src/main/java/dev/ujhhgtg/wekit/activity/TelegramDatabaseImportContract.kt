@@ -18,7 +18,7 @@ object TelegramDatabaseImportContract {
 class PickRootTelegramStickerSetsContract : ActivityResultContract<Unit, RootTelegramStickerSetsResult>() {
 
     override fun createIntent(context: Context, input: Unit): Intent = Intent {
-        setClassName(PackageNames.MODULE, "${PackageNames.MODULE}.activity.MainActivity")
+        setClassName(PackageNames.MODULE, "dev.ujhhgtg.wekit.activity.MainActivity")
         action = TelegramDatabaseImportContract.ACTION_PICK_ROOT_STICKER_SETS
     }
 
