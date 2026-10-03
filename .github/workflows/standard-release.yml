@@ -69,9 +69,12 @@ jobs:
           set +o pipefail
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses
           set -o pipefail
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;$NDK_VERSION"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "ndk;$NDK_VERSION" "ndk;29.0.14206865"
 
           NDK_BIN="$ANDROID_HOME/ndk/$NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          LSP_NDK_BIN="$ANDROID_HOME/ndk/29.0.14206865/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          test -x "$LSP_NDK_BIN/aarch64-linux-android${MIN_SDK}-clang"
           test -x "$NDK_BIN/aarch64-linux-android${MIN_SDK}-clang"
           test -x "$NDK_BIN/llvm-strip"
 
@@ -136,6 +139,19 @@ jobs:
           print(f"LSParanoid AGP aligned to {agp}")
           PY
 
+      - name: Install O-MVLL native protection toolchain
+        run: |
+          set -euo pipefail
+          python3 third_party/lspeciallyparanoid/tools/setup-native-toolchain.py \
+            --sdk "$ANDROID_HOME"
+          export LSP_TOOLCHAIN="$HOME/.local/share/lspeciallyparanoid/toolchains/omvll-1.9.1"
+          test -f "$LSP_TOOLCHAIN/omvll-ndk.so"
+          test -f "$LSP_TOOLCHAIN/Python-3.10.7/Lib/encodings/__init__.py"
+          {
+            echo "LSP_OMVLL_PLUGIN=$LSP_TOOLCHAIN/omvll-ndk.so"
+            echo "LSP_OMVLL_PYTHONPATH=$LSP_TOOLCHAIN/Python-3.10.7/Lib"
+          } >> "$GITHUB_ENV"
+
       - name: Build standard Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -159,6 +175,9 @@ jobs:
             echo "Signing secrets are not complete; using the project's existing fallback signing configuration."
           fi
 
+          export ORG_GRADLE_PROJECT_lspNdkVersion=29.0.14206865
+          export ORG_GRADLE_PROJECT_lspOmvllPlugin="$LSP_OMVLL_PLUGIN"
+          export ORG_GRADLE_PROJECT_lspOmvllPythonPath="$LSP_OMVLL_PYTHONPATH"
           ./x build --flavor standard --release
 
       - name: Verify standard Release APK
