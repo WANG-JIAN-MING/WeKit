@@ -314,7 +314,7 @@ object StickersManagerEnhancements : SwitchFeature() {
             selectedMd5s.forEachIndexed { index, md5 ->
                 WeMessageApi.saveStickerByMd5(md5, "sticker_${baseName}_$index.gif")
             }
-            showToastSuspend(localizedChatQuantity(R.plurals.chat_sticker_manager_exported, selectedMd5s.size, selectedMd5s.size, "/sdcard/Download/WeKit"))
+            showToastSuspend(localizedChatQuantity(R.plurals.chat_sticker_manager_exported, selectedMd5s.size, selectedMd5s.size, "/sdcard/Download/X"))
         }
     }
 }

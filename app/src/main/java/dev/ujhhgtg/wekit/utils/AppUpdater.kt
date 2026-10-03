@@ -147,7 +147,7 @@ object AppUpdater {
             downloadUrl = "$BASE_URL/$fileName"
             mimeType = ZIP_MIME_TYPE
         } else {
-            fileName = "wekit-${info.versionName}.apk"
+            fileName = "x-${info.versionName}.apk"
             downloadUrl = apkUrlForDevice()
             mimeType = APK_MIME_TYPE
         }

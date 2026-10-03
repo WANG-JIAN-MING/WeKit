@@ -810,7 +810,7 @@ class MainActivity : ComponentActivity() {
                     icon = GitHubIcon,
                     title = stringResource(R.string.brand_github),
                     subtitle = "X",
-                    onClick = { onUrlClick("https://github.com/Ujhhgtg/WeKit") }
+                    onClick = { onUrlClick("https://github.com/WANG-JIAN-MING/wx") }
                 )
                 LinkCard(
                     icon = TelegramIcon,

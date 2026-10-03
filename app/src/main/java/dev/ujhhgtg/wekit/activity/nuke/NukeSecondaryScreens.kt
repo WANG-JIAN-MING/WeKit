@@ -605,7 +605,7 @@ private fun NukeAboutPage(
                     leading = { NukeVectorCategoryIcon(GitHubIcon) },
                     trailing = { NukeCountAndChevron(text = null) },
                     onClick = {
-                        "https://github.com/Ujhhgtg/WeKit".toUri().openInSystem(context, true)
+                        "https://github.com/WANG-JIAN-MING/wx".toUri().openInSystem(context, true)
                     },
                 )
                 NukeDivider()

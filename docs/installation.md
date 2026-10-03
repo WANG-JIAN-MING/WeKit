@@ -4,8 +4,8 @@
 
 本项目不会发布稳定版本, 请从以下渠道下载最新 CI 构建产物 (每夜版):
 
-- [GitHub CI Release](https://github.com/Ujhhgtg/WeKit/releases/tag/CI)
-- [GitHub Actions](https://github.com/Ujhhgtg/WeKit/actions/workflows/ci.yml)
+- [GitHub CI Release](https://github.com/WANG-JIAN-MING/wx/releases/tag/CI)
+- [GitHub Actions](https://github.com/WANG-JIAN-MING/wx/actions/workflows/ci.yml)
 - [Telegram 超级群组](https://t.me/+7j5dJ6g16B43OWVl)
 
 **Xposed 和 Zygisk 共用同一份 APK**, 不再单独发布 `wekit-zygisk` 模块 ZIP。所有

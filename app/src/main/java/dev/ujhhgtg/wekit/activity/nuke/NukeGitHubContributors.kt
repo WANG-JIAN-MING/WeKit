@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 private const val TAG = "NukeGitHubContributors"
 private const val CONTRIBUTORS_URL =
-    "https://api.github.com/repos/Ujhhgtg/WeKit/contributors?per_page=100"
+    "https://api.github.com/repos/WANG-JIAN-MING/wx/contributors?per_page=100"
 
 data class NukeGitHubContributor(
     val login: String,

@@ -10,7 +10,7 @@
 ## 克隆仓库
 
 ```bash
-git clone https://github.com/Ujhhgtg/WeKit.git --recursive
+git clone https://github.com/WANG-JIAN-MING/wx.git --recursive
 cd X
 ```
 
@@ -327,4 +327,4 @@ uv run --locked --project wekit-zygisk --group test python wekit-zygisk/native/t
 CI 还对每个产出的 APK 执行 `.github/scripts/verify-dual-apk.py --check-installer`，
 检查签名、对齐、APK/模块版本一致性及模块安装行为，并测试从实际 APK 读取 DEX。
 桌面验证和构建通过不代表真机 ART 或微信运行正常。支持的 Hook 目标、后端限制和
-真机验证项目见 [Zygisk 原生开发说明](https://github.com/Ujhhgtg/WeKit/blob/master/wekit-zygisk/README.md)。
+真机验证项目见 [Zygisk 原生开发说明](https://github.com/WANG-JIAN-MING/wx/blob/master/wekit-zygisk/README.md)。

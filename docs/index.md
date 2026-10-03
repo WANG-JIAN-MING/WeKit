@@ -6,7 +6,7 @@ X 是一个功能丰富的微信增强模块, 支持通过 Xposed 框架或 Zygi
 
 两种加载方式共用同一 APK: 直接安装用于 Xposed, 将扩展名改为 `.zip` 后通过 Root 管理器刷入用于 Zygisk。具体步骤见 [安装指南](installation.md)。
 
-[![CI 状态](https://github.com/Ujhhgtg/WeKit/actions/workflows/ci.yml/badge.svg)](https://github.com/Ujhhgtg/WeKit/actions/workflows/ci.yml)
+[![CI 状态](https://github.com/WANG-JIAN-MING/wx/actions/workflows/ci.yml/badge.svg)](https://github.com/WANG-JIAN-MING/wx/actions/workflows/ci.yml)
 
 ## 导航
 
@@ -33,7 +33,7 @@ X 是一个功能丰富的微信增强模块, 支持通过 Xposed 框架或 Zygi
 
 ## 联系
 
-[GitHub 仓库](https://github.com/Ujhhgtg/WeKit)
+[GitHub 仓库](https://github.com/WANG-JIAN-MING/wx)
 
 [Telegram 超级群组](https://t.me/+7j5dJ6g16B43OWVl)
 

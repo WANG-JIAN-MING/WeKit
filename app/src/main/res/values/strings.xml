@@ -2948,11 +2948,11 @@
     <string name="shortvideos_unknown_media_type">Unknown media type</string>
     <string name="shortvideos_image_download_started">Starting download of image %1$d</string>
     <string name="shortvideos_image_download_reported_success">Image %1$d download completed</string>
-    <string name="shortvideos_image_downloaded_to">Image saved to /sdcard/Download/WeKit/%1$s</string>
+    <string name="shortvideos_image_downloaded_to">Image saved to /sdcard/Download/X/%1$s</string>
     <string name="shortvideos_downloading_video">Downloading video…</string>
     <string name="shortvideos_decrypting_video">Decrypting video…</string>
     <string name="shortvideos_video_download_failed">Video download failed</string>
-    <string name="shortvideos_video_downloaded_to">Video saved to /sdcard/Download/WeKit/%1$s</string>
+    <string name="shortvideos_video_downloaded_to">Video saved to /sdcard/Download/X/%1$s</string>
     <string name="shortvideos_video_download_started">Starting video download</string>
 
     <!-- Task 5 group 2: themes and home side panel -->
