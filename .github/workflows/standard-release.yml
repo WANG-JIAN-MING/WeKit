@@ -105,6 +105,7 @@ jobs:
 
       - name: Build standard Release
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # When all four secrets exist, the Gradle script uses the original
           # project's release signing path. Otherwise its existing debug-signing
           # fallback still produces the standard Release APK.
