@@ -262,8 +262,8 @@ object WeChatMessageContextMenuApi : ApiFeature(), IResolveDex {
                 setImageDrawable(ExtensionDrawable())
                 scaleType = ImageView.ScaleType.CENTER
                 setBackgroundResource(0)
-                contentDescription = "WeKit"
-                tooltipText = "WeKit"
+                contentDescription = "X"
+                tooltipText = "X"
                 bar.setTag(R.id.wekit_multi_select_button, this)
             }
         button.setOnClickListener { view ->
@@ -317,9 +317,9 @@ object WeChatMessageContextMenuApi : ApiFeature(), IResolveDex {
                     .filter { it.isSupported(msgInfoWrapper) }
 
                 if (MergeChatMessageContextMenuItems.isEnabled) {
-                    // collapse everything into a single "WeKit" entry backed by a Compose dialog
+                    // collapse everything into a single "X" entry backed by a Compose dialog
                     if (applicableItems.isNotEmpty()) {
-                        addMenuItem.invoke(MERGED_MENU_ITEM_ID, "WeKit", ExtensionIcon)
+                        addMenuItem.invoke(MERGED_MENU_ITEM_ID, "X", ExtensionIcon)
                     }
                 } else {
                     for (item in applicableItems) {

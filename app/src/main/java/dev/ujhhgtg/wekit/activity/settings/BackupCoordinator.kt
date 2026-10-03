@@ -35,7 +35,7 @@ import kotlinx.serialization.json.put
 import dev.ujhhgtg.wekit.utils.serialization.DefaultJson
 
 /**
- * Creates and restores the user-facing WeKit backup format.
+ * Creates and restores the user-facing X backup format.
  *
  * The archive deliberately has a small, explicit allow-list. Runtime artifacts, caches,
  * diagnostics and host data are never discovered by walking the whole module directory.
@@ -93,7 +93,7 @@ object BackupCoordinator {
 
     fun create(context: Context, output: File): Result = withStorageLock(context) {
         val root = storageRoot(context)
-        require(root.isDirectory) { "WeKit 数据目录不存在" }
+        require(root.isDirectory) { "X 数据目录不存在" }
         val database = WeKitDatabase.file
         require(database.isFile) { "统一数据库不存在，无法创建完整备份" }
 
@@ -213,7 +213,7 @@ object BackupCoordinator {
     /**
      * Removes only the source roots left by the pre-private-storage migration.
      *
-     * The current WeKit root is intentionally untouched: this operation is for reclaiming
+     * The current module root is intentionally untouched: this operation is for reclaiming
      * space after migration, while [clearAll] remains the destructive reset action.
      */
     fun clearLegacyData(context: Context): LegacyStorageMigration.LegacyCleanupResult =

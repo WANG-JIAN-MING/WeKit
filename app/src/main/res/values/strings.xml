@@ -394,7 +394,7 @@
     <string name="config_clearing">Clearing…</string>
     <string name="config_clear_success">Cleared successfully!</string>
     <string name="cleanup_legacy_dialog_title">Clean up old data</string>
-    <string name="cleanup_legacy_dialog_message">Delete the legacy WeKit storage locations left after migration? Current module data will not be changed.</string>
+    <string name="cleanup_legacy_dialog_message">Delete the legacy module storage locations left after migration? Current module data will not be changed.</string>
     <string name="cleanup_legacy_success">Old data cleaned successfully!</string>
     <string name="update_available_title">New version available</string>
     <string name="update_available_message">Current version: %1$s\nNew version: %2$s\nDownload and install it?</string>
@@ -2668,7 +2668,7 @@
     <plurals name="contacts_detect_marking"><item quantity="one">Applying label “%1$s”; please wait…\nCompleted: %2$d/%3$d friend</item><item quantity="other">Applying label “%1$s”; please wait…\nCompleted: %2$d/%3$d friends</item></plurals>
     <string name="contacts_detect_stop">Stop</string>
     <string name="contacts_detect_back">Back</string>
-    <string name="contacts_detect_suggested_label">WeKit_deleted_friends_%1$s</string>
+    <string name="contacts_detect_suggested_label">X_deleted_friends_%1$s</string>
     <string name="contacts_detect_mark_label">Apply label</string>
     <string name="contacts_detect_delete_all">Delete all</string>
     <string name="contacts_hide_restored">Hidden contacts restored</string>

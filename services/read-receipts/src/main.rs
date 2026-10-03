@@ -602,7 +602,7 @@ async fn route_command(
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     use std::io::IsTerminal;
     if std::env::args().any(|argument| argument == "--help" || argument == "-h") {
-        println!("WeKit read receipts reference server");
+        println!("X read receipts reference server");
         println!();
         println!("Configuration is read from environment variables:");
         println!("  BIND_ADDR              bind IP address (default: 0.0.0.0)");

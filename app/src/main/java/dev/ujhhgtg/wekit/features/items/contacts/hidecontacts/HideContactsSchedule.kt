@@ -102,7 +102,7 @@ object HideContactsSchedule {
     private const val KEY_SCHEDULES = "hide_contacts_schedules"
 
     /**
-     * Private to WeKit and namespaced under the module's own package, so it cannot collide with any
+     * Private to X and namespaced under the module's own package, so it cannot collide with any
      * of WeChat's own broadcasts. The broadcast is additionally package-restricted (see
      * [pendingIntentFor]) and the receiver is registered `NOT_EXPORTED`, so nothing outside this app
      * can send or observe it.

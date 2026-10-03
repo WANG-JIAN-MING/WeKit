@@ -9,7 +9,7 @@ import dev.ujhhgtg.wekit.i18n.WeKitLocaleProvider
 import dev.ujhhgtg.wekit.utils.HostInfo
 
 /**
- * Theme for WeKit UI injected INTO WeChat.
+ * Theme for X UI injected INTO WeChat.
  *
  * The seed is [SeedResolver.injectedSeed]: WeChat green by default, or the selected seed when
  * opted into WeChat ([ThemeSettings.applyToWechat]). This is read once when the composition

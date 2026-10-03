@@ -9,8 +9,8 @@ export default defineConfig(() => {
   const sidebar = createSidebar(root)
   return {
     lang: 'zh-CN',
-    title: 'WeKit',
-    description: 'WeKit 开发版文档：安装、配置、微信增强功能与开发贡献指南。',
+    title: 'X',
+    description: 'X 开发版文档：安装、配置、微信增强功能与开发贡献指南。',
     cleanUrls: true,
     srcExclude: ['SUMMARY.md', 'features/**/README.md'],
     themeConfig: {

@@ -46,7 +46,7 @@ import dev.ujhhgtg.wekit.utils.strings.isGroupChatWxId
  * 微信服务器只看 atuserlist 里的真实 wxid CSV 推送"有人@我"提醒,
  * 不要求 content 中存在 @ 文本, 因此接收方气泡内看不到任何 @ 痕迹。
  * (来自"终极隐藏艾特"插件验证的行为; 该插件对出网 protobuf 的混淆类名/
- * 字段偏移反射在 WeKit 中由入库钩子替代, 见 SendSecMsg 的同一锚点。)
+ * 字段偏移反射在 X 中由入库钩子替代, 见 SendSecMsg 的同一锚点。)
  *
  * 跨版本锚点 (8.0.65–8.0.77 混淆名各不相同, 不使用类名/方法名):
  * - 消息入库方法: MsgInfoStorage 中 "Error insert message msg:%s talker:%s"

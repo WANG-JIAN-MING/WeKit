@@ -315,18 +315,18 @@
 //            nm.createNotificationChannel(ch)
 //        }
 //
-//        createChannel(CHANNEL_SILENT, "WeKit静音通知", NotificationManager.IMPORTANCE_LOW, sound = null, vibrate = false)
-//        createChannel(CHANNEL_LOW, "WeKit 低优先级通知", NotificationManager.IMPORTANCE_LOW, sound = null, vibrate = false)
-//        createChannel(CHANNEL_DEFAULT, "WeKit 默认通知", NotificationManager.IMPORTANCE_DEFAULT)
-//        createChannel(CHANNEL_HIGH, "WeKit 高优先级通知", NotificationManager.IMPORTANCE_HIGH)
-//        createChannel(CHANNEL_URGENT, "WeKit 紧急通知", NotificationManager.IMPORTANCE_MAX)
+//        createChannel(CHANNEL_SILENT, "X静音通知", NotificationManager.IMPORTANCE_LOW, sound = null, vibrate = false)
+//        createChannel(CHANNEL_LOW, "X 低优先级通知", NotificationManager.IMPORTANCE_LOW, sound = null, vibrate = false)
+//        createChannel(CHANNEL_DEFAULT, "X 默认通知", NotificationManager.IMPORTANCE_DEFAULT)
+//        createChannel(CHANNEL_HIGH, "X 高优先级通知", NotificationManager.IMPORTANCE_HIGH)
+//        createChannel(CHANNEL_URGENT, "X 紧急通知", NotificationManager.IMPORTANCE_MAX)
 //    }
 //
 //    private fun ensureCustomSoundChannel(soundUri: Uri): String {
 //        val id = "wekit_msg_custom_${soundUri.hashCode()}"
 //        val nm = HostInfo.application.getSystemService<NotificationManager>()
 //        if (nm.getNotificationChannel(id) == null) {
-//            val ch = NotificationChannel(id, "WeKit 自定义铃声通知", NotificationManager.IMPORTANCE_DEFAULT).apply {
+//            val ch = NotificationChannel(id, "X 自定义铃声通知", NotificationManager.IMPORTANCE_DEFAULT).apply {
 //                setSound(
 //                    soundUri, AudioAttributes.Builder()
 //                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)

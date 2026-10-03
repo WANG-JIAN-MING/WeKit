@@ -28,7 +28,7 @@ object ModuleSettings : SwitchFeature(), WeHomeScreenPopupMenuApi.IMenuItemsProv
     override fun getMenuItems(param: HookParam): List<WeHomeScreenPopupMenuApi.MenuItem> =
         listOf(
             WeHomeScreenPopupMenuApi.MenuItem(
-                0, BuildConfig.TAG, ExtensionIcon
+                0, BuildConfig.DISPLAY_NAME, ExtensionIcon
             ) { WeSettingsInjector.openSettingsDialog(LauncherUI.getInstance()!!) }
         )
 }

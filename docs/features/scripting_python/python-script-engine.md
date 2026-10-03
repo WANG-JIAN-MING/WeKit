@@ -1,6 +1,6 @@
 # Python 插件引擎
 
-入口：WeKit 设置 → 功能 → 脚本 (Python) → Python 插件引擎。
+入口：X 设置 → 功能 → 脚本 (Python) → Python 插件引擎。
 
 ## 首次使用
 
@@ -13,7 +13,7 @@
 
 ## 运行时与开发参考
 
-WeKit's Python engine is an independent CPython plugin subsystem. It does not adapt the Java/BeanShell engine and has no JavaEngine callback compatibility layer.
+X's Python engine is an independent CPython plugin subsystem. It does not adapt the Java/BeanShell engine and has no JavaEngine callback compatibility layer.
 
 ## Distribution
 
@@ -41,12 +41,12 @@ Constructor keywords are generated from DexKit's fluent setters, so
 and the equivalent fluent chain are the same binding.
 
 `ctx.dex` accepts these real bindings for class, method, constructor and field
-queries. Queries use WeKit's shared DexKit lease off the UI thread and return
+queries. Queries use X's shared DexKit lease off the UI thread and return
 descriptors tagged with the current host version/build rather than
 process-stale reflection objects. The generated `.pyi` files ship in
 `wekit-python-sdk.zip` with the runtime and examples.
 
-The manager remains available when the runtime pack is absent. Missing runtime state is shown as `RUNTIME_MISSING`; WeKit does not download it or show an installation dialog during WeChat startup.
+The manager remains available when the runtime pack is absent. Missing runtime state is shown as `RUNTIME_MISSING`; X does not download it or show an installation dialog during WeChat startup.
 
 ## Trust boundary
 

@@ -286,7 +286,7 @@ abstract class WeKitDatabase : RoomDatabase() {
         )
 
         /**
-         * 17 → 18 adds the unified WeKit storage catalog.  These tables intentionally have no
+         * 17 → 18 adds the unified X storage catalog.  These tables intentionally have no
          * foreign keys: file-backed content may be imported in a later phase and a missing file
          * must be reported instead of making Room silently delete its index row.
          */
@@ -437,7 +437,7 @@ abstract class WeKitDatabase : RoomDatabase() {
                     WeLogger.e(TAG, "migrated database failed to open; rolling back", t)
                     runCatching { database.close() }
                     relocator.rollbackLocked(prepared)
-                    throw IllegalStateException("Unable to open the unified WeKit database", t)
+                    throw IllegalStateException("Unable to open the unified X database", t)
                 }
             }
         }

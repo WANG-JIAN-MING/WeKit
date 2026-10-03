@@ -16,7 +16,7 @@ pub const ANDROID_LOG_WARN: c_int = 5;
 pub const ANDROID_LOG_ERROR: c_int = 6;
 
 #[cfg(target_os = "android")]
-static LOG_TAG: &std::ffi::CStr = c"WeKit";
+static LOG_TAG: &std::ffi::CStr = c"X";
 
 #[cfg(target_os = "android")]
 unsafe extern "C" {
@@ -35,7 +35,7 @@ pub fn android_log(prio: c_int, msg: &str) {
 
 #[cfg(not(target_os = "android"))]
 pub fn android_log(_prio: c_int, msg: &str) {
-    eprintln!("[WeKit] {msg}");
+    eprintln!("[X] {msg}");
 }
 
 #[macro_export]

@@ -27,7 +27,7 @@ class LegacyDatabaseRelocator(
     /**
      * The lock is deliberately separate from the published database.  A process may be killed
      * while copying, so the lock must not be inferred from a marker file that another process can
-     * remove.  File locks are advisory on Android, but every WeKit process uses this lock before
+     * remove.  File locks are advisory on Android, but every X process uses this lock before
      * touching the destination during first-run relocation.
      */
     private val lockFile: File

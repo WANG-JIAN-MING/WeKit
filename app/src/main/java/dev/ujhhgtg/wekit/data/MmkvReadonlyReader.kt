@@ -6,7 +6,7 @@ import java.nio.ByteOrder
 import java.util.zip.CRC32
 
 /**
- * Minimal, read-only decoder for the unencrypted MMKV files written by the old WeKit facade.
+ * Minimal, read-only decoder for the unencrypted MMKV files written by the old X facade.
  *
  * This deliberately does not load MMKV's native library and never opens a file for writing.
  * A read takes a stable snapshot (the CRC metadata must match) and applies the records in
@@ -107,7 +107,7 @@ object MmkvReadonlyReader {
             .toList()
     }
 
-    /** Decodes only the value types used by the legacy WeKit facade. */
+    /** Decodes only the value types used by the legacy X facade. */
     fun decode(entry: RawEntry): Any? = when (entry.marker) {
         TYPE_BOOL -> decodeBool(entry.bytes)
         TYPE_INT -> decodeInt(entry.bytes)

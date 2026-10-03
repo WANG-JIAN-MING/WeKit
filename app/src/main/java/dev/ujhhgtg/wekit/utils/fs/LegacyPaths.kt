@@ -28,7 +28,7 @@ object LegacyPaths {
         HostInfo.application.filesDir.asPath / "wekit-agent" / "weagent.db"
     }
 
-    /** Root used by extension packs before they shared the WeKit private root. */
+    /** Root used by extension packs before they shared the X private root. */
     val privateExtensionRoot: Path by lazy {
         HostInfo.application.filesDir.asPath / "wekit-extensions"
     }

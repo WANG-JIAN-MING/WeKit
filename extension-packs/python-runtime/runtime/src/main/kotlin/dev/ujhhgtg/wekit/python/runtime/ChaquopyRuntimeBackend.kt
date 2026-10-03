@@ -13,7 +13,7 @@ internal class ChaquopyRuntimeBackend : PythonRuntimeBackend {
     override fun start(config: PythonRuntimeConfig) {
         if (this::config.isInitialized) return
         this.config = config
-        check(!Python.isStarted()) { "Chaquopy Python was started outside WeKit's runtime backend" }
+        check(!Python.isStarted()) { "Chaquopy Python was started outside X's runtime backend" }
         Python.start(WeKitAndroidPlatform(config))
         withLookupLoader {
             Python.getInstance().getModule("java.chaquopy")

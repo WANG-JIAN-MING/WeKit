@@ -36,7 +36,7 @@ if(NOT ANDROID)
     return()
 endif()
 if(NOT ANDROID_ABI STREQUAL "arm64-v8a")
-    message(FATAL_ERROR "The WeKit Zygisk bridge requires Android arm64-v8a")
+    message(FATAL_ERROR "The X Zygisk bridge requires Android arm64-v8a")
 endif()
 enable_language(CXX)
 

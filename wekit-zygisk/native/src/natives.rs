@@ -158,7 +158,7 @@ unsafe fn receive_telegram_response(sock: libc::c_int) -> Result<(), String> {
     match status {
         crate::protocol::TELEGRAM_RESPONSE_OK => Ok(()),
         crate::protocol::TELEGRAM_RESPONSE_DISABLED => {
-            Err("WeKit Zygisk target is disabled".to_string())
+            Err("X Zygisk target is disabled".to_string())
         }
         crate::protocol::TELEGRAM_RESPONSE_ERROR => {
             let msg = crate::protocol::read_string_from_fd(sock)

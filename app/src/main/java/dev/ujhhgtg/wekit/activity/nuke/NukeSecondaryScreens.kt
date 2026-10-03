@@ -601,7 +601,7 @@ private fun NukeAboutPage(
             NukeSettingGroup(title = stringResource(R.string.nuke_about_links)) {
                 NukePreferenceRow(
                     title = stringResource(R.string.brand_github),
-                    description = "Ujhhgtg/WeKit",
+                    description = "X",
                     leading = { NukeVectorCategoryIcon(GitHubIcon) },
                     trailing = { NukeCountAndChevron(text = null) },
                     onClick = {

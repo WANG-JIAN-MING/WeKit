@@ -794,7 +794,7 @@ object JavaEngine {
                     return@BshMethod runCatchingBsh("getAvatarUrl") { WeDatabaseApi.getAvatarUrl(wxId) }.getOrDefault("")
                 })
 
-            // getAvatarUrl(wxId, big) → 'big' param not supported by WeKit; defaults to same URL
+            // getAvatarUrl(wxId, big) → 'big' param not supported by X; defaults to same URL
             setMethod(
                 BshMethod(
                     "getAvatarUrl", arrayOf(BString, java.lang.Boolean.TYPE)

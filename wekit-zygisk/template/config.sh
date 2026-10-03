@@ -233,7 +233,7 @@ list_installed_packages_for_user() {
 }
 
 write_default_header() {
-  printf '%s\n' '# WeKit Zygisk injection targets v1'
+  printf '%s\n' '# X Zygisk injection targets v1'
   printf '%s\n' '# userId<TAB>packageName<TAB>enabled'
 }
 
@@ -432,7 +432,7 @@ set_enabled() {
   enabled=$3
   is_valid_user_id "$user_id" && is_valid_package "$package_name" || return 2
   if ! is_wechat_package "$package_name"; then
-    echo "WeKit Zygisk supports only packages matching $TARGET_PACKAGE_PREFIX*" >&2
+    echo "X Zygisk supports only packages matching $TARGET_PACKAGE_PREFIX*" >&2
     return 4
   fi
   [ "$enabled" = 0 ] || [ "$enabled" = 1 ] || return 2
@@ -449,7 +449,7 @@ run_logged_command() {
     log_event INFO "command=$wekit_command_name finish status=0"
   else
     log_event ERROR "command=$wekit_command_name finish status=$wekit_command_status"
-    printf 'WeKit command failed: %s (exit %s)\nFull log: %s\n' "$wekit_command_name" "$wekit_command_status" "$LOG_FILE" >&2
+    printf 'X command failed: %s (exit %s)\nFull log: %s\n' "$wekit_command_name" "$wekit_command_status" "$LOG_FILE" >&2
   fi
   return "$wekit_command_status"
 }
@@ -502,7 +502,7 @@ export_logcat_locked() {
   temp_file=$LOGCAT_FILE.tmp.$$
   rm -f "$temp_file"
   # KernelSU WebUI shells may inherit ANDROID_LOG_TAGS. Supply an explicit
-  # verbose filter so every buffer includes WeKit's app-process tags.
+  # verbose filter so every buffer includes X's app-process tags.
   ANDROID_LOG_TAGS='*:V' /system/bin/logcat -d -b all -v threadtime '*:V' > "$temp_file"
   status=$?
   if [ "$status" -ne 0 ]; then

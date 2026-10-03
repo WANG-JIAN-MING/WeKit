@@ -52,7 +52,7 @@ object NukeGitHubContributors {
             .url(CONTRIBUTORS_URL)
             .header("Accept", "application/vnd.github+json")
             .header("X-GitHub-Api-Version", "2022-11-28")
-            .header("User-Agent", "WeKit")
+            .header("User-Agent", "X")
             .build()
         val contributors = httpClient.newCall(request).execute().use { response ->
             check(response.isSuccessful) { "GitHub contributors request failed: HTTP ${response.code}" }

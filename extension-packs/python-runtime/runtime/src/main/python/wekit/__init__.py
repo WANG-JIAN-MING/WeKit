@@ -1,1 +1,1 @@
-"""WeKit's Python-specific plugin SDK."""
+"""X's Python-specific plugin SDK."""

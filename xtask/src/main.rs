@@ -1,4 +1,4 @@
-//! WeKit xtask — build automation for the WeKit Android project.
+//! X xtask — build automation for the X Android project.
 //!
 //! Usage: cargo xtask <COMMAND>
 //!
@@ -6,7 +6,7 @@
 //!   build [OPTIONS]      Build the project (default: full Android debug build via Gradle).
 //!   check [OPTIONS]      Run `cargo check` on the native library.
 //!   clippy [OPTIONS]     Run `cargo clippy` on the native library.
-//!   dex-test [OPTIONS]   Resolve WeKit DexKit targets against desktop APKs.
+//!   dex-test [OPTIONS]   Resolve X DexKit targets against desktop APKs.
 //!   dex-report-diff      Compare member signatures in existing per-APK reports.
 //!   dex-test-ci          Prepare APK sources and mutable Dex-Test Release assets.
 //!   i18n-check           Validate the Android English and Chinese resource catalogs.
@@ -89,7 +89,7 @@ const ZYGISK_MODULE_ID: &str = "wekit_zygisk";
 #[derive(Parser)]
 #[command(
     name = "cargo xtask",
-    about = "WeKit build automation",
+    about = "X build automation",
     long_about = None,
     disable_help_subcommand = true,
 )]
@@ -241,7 +241,7 @@ fn print_banner() {
     | |/ |/ /  __/ /| |/ / /_
     |__/|__/\___/_/ |_/_/\__/
 
-[WeKit] WeChat, now with superpowers
+[X] WeChat, now with superpowers
 "#
     );
 }
@@ -279,7 +279,7 @@ pub(crate) fn workspace_root() -> PathBuf {
         }
         dir = dir
             .parent()
-            .unwrap_or_else(|| panic!("workspace root not found; run from inside the WeKit repo"))
+            .unwrap_or_else(|| panic!("workspace root not found; run from inside the X repo"))
             .to_owned();
     }
 }
@@ -1293,7 +1293,7 @@ mod tests {
         fs::create_dir(&path).unwrap();
         for args in [
             vec!["init", "-q"],
-            vec!["config", "user.name", "WeKit Test"],
+            vec!["config", "user.name", "X Test"],
             vec!["config", "user.email", "wekit-test@example.invalid"],
         ] {
             assert!(

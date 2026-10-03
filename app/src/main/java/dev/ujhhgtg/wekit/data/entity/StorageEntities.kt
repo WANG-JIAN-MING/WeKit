@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.Index
 
 /**
- * A typed value migrated from WeKit's legacy preference stores.
+ * A typed value migrated from X's legacy preference stores.
  *
  * Values are deliberately represented as a small set of nullable columns instead of a
  * polymorphic blob.  This keeps the database exportable without depending on the implementation
@@ -98,7 +98,7 @@ data class AssetBindingEntity(
 
 /**
  * Index for a script directory. Script source and companion files remain files and are never
- * copied into a BLOB column; [relativePath] is relative to the managed WeKit root.
+ * copied into a BLOB column; [relativePath] is relative to the managed X root.
  */
 @Entity(
     tableName = "script_catalog",

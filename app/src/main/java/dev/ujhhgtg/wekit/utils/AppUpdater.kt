@@ -75,7 +75,7 @@ private fun apkUrlForDevice(): String {
 
 /** Matches the release name emitted by the Zygisk packager. */
 private fun zygiskModuleFileName(info: UpdateInfo): String =
-    "WeKit-${info.versionCode}-${info.versionName}-release.zip"
+    "X-${info.versionCode}-${info.versionName}-release.zip"
 
 // ─── AppUpdater ───────────────────────────────────────────────────────────────
 

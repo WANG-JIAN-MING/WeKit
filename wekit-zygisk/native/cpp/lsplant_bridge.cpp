@@ -14,7 +14,7 @@ using InlineUnhook = bool (*)(void *);
 namespace {
 
 void report_exception(JNIEnv *env, const char *operation, const char *message) noexcept {
-    __android_log_print(ANDROID_LOG_ERROR, "WeKit", "LSPlant %s: %s", operation, message);
+    __android_log_print(ANDROID_LOG_ERROR, "X", "LSPlant %s: %s", operation, message);
     if (!env->ExceptionCheck()) {
         if (jclass exception = env->FindClass("java/lang/IllegalStateException")) {
             env->ThrowNew(exception, message);

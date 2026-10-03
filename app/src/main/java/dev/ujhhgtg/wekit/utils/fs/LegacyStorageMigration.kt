@@ -39,7 +39,7 @@ object LegacyStorageMigration {
     /**
      * Result of the user-requested legacy-data cleanup.
      *
-     * [removedPaths] contains only old WeKit paths whose migrated counterpart was present.  Any
+     * [removedPaths] contains only old X paths whose migrated counterpart was present.  Any
      * source entry which cannot be paired with a destination is returned in [retainedPaths] and
      * is deliberately left untouched so a cleanup click can never discard an incomplete
      * migration.  [blockedReason] is set when the one-shot migration has not published its marker
@@ -78,7 +78,7 @@ object LegacyStorageMigration {
     }
 
     /**
-     * Remove old WeKit storage after the one-shot migration has completed.
+     * Remove old X storage after the one-shot migration has completed.
      *
      * This is intentionally separate from [run]: migration keeps its sources for rollback, while
      * this method is only called from an explicit settings action.  It never walks or deletes the

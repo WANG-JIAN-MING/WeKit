@@ -1,6 +1,6 @@
 # 开发指南
 
-本页介绍 WeKit 的开发环境、构建命令和产物。专题说明请参阅：
+本页介绍 X 的开发环境、构建命令和产物。专题说明请参阅：
 
 - [DexKit 解析器测试](linux-dex-test.md)
 - [国际化开发指南](i18n.md)
@@ -11,7 +11,7 @@
 
 ```bash
 git clone https://github.com/Ujhhgtg/WeKit.git --recursive
-cd WeKit
+cd X
 ```
 
 ## 环境要求

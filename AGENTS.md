@@ -2,7 +2,7 @@
 
 ## Superpowers
 
-- All Superpowers workflow artifacts for WeKit (plans, specs/designs, SDD ledgers and
+- All Superpowers workflow artifacts for X (plans, specs/designs, SDD ledgers and
   reports, brainstorm sessions) are written, edited, and committed **only** in
   `~/coding/wekit_dev/superpowers` (its own git repo; read its `AGENTS.md` for layout and
   rules). Never create, edit, or commit `.superpowers/` or `docs/superpowers/` inside this
@@ -156,7 +156,7 @@
   database integration when they fall outside the qualifying conditions below; use the required
   build, static checks, and manual host validation instead.
 
-- TDD and new automated tests are allowed only when all core logic under test lives in WeKit,
+- TDD and new automated tests are allowed only when all core logic under test lives in X,
   has low coupling to WeChat, and does not depend on WeChat host classes, runtime state, UI, or
   behavior.
 - Do not add tests for simple logic that is easy to verify by static review, such as constants,
@@ -216,7 +216,7 @@
 - The libraries `DexKit` and `reflekt` are NOT something you are familiar with. Do NOT hallucinate their API surfaces. Read their code before using them.
 - In Compose, `LocalContext` always means the platform context and is never localized by WeKit.
   Use standard Compose resource APIs for composable text and `LocalWeKitLocalizedContext` only
-  for imperative WeKit resource reads. Mixed platform/resource operations must read both locals.
+  for imperative X resource reads. Mixed platform/resource operations must read both locals.
   Use `LocalActivity.current` for Activity-only APIs, and never add AndroidX owner forwarding to
   `WeKitLocaleProvider`.
 
@@ -224,7 +224,7 @@
 
 Design reference: `~/coding/InstallerX-Revived` — when unsure how a settings page should
 look or behave, read its `app/src/main/java/com/rosan/installer/ui/page/main/widget/setting/`.
-WeKit's ported widget family lives in `app/src/main/java/dev/ujhhgtg/wekit/ui/content/m3/`.
+X's ported widget family lives in `app/src/main/java/dev/ujhhgtg/wekit/ui/content/m3/`.
 
 ### Layout
 

@@ -1,4 +1,4 @@
-# WeKit
+# X
 
 适用于微信的增强模块，支持 Xposed 和 Zygisk 两种加载方式。
 
@@ -33,7 +33,7 @@
 
 ## 致谢
 
-[WeKit 上游](https://github.com/cwuom/WeKit)
+[X 上游](https://github.com/cwuom/WeKit)
 
 [WAuxiliary](https://github.com/HdShare/WAuxiliary_Public)
 

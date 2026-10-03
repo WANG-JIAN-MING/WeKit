@@ -155,7 +155,7 @@ def main():
     tag, version, min_sdk, digest = inspect_apk(apk, args.commit, tools)
     marker = f"<!-- wekit-build:{args.commit}:{digest} -->"
     notes = args.notes_file.read_text().strip()
-    body = f"""WeKit CI 构建 · standard（LSPosed）
+    body = f"""X CI 构建 · standard（LSPosed）
 
 版本：`{tag}`
 
@@ -168,7 +168,7 @@ def main():
 - 本发布仅提供 `app-standard-release.apk`，适用于 LSPosed。
 - APK 最低 Android SDK：{min_sdk}；架构：ARM64。
 - 安装后在 LSPosed 中启用模块并勾选微信，完全结束并重启微信。
-- 设置入口：微信「我 → 设置 → WeKit 设置」。
+- 设置入口：微信「我 → 设置 → X 设置」。
 - [兼容范围与使用说明](https://docs.wekit.ujhhgtg.dev/getting-started) · [其他框架所需的 legacy 版本](https://github.com/Ujhhgtg/WeKit/releases/tag/CI)
 
 ### 校验

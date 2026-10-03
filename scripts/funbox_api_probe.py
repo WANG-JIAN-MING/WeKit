@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """PC-side probe for the FunBox private binary API.
 
-This intentionally mirrors the recovered Java transport instead of importing WeKit code,
+This intentionally mirrors the recovered Java transport instead of importing X code,
 so it can expose behavioral differences in the Kotlin implementation. It only sends fields
 required by operations 100 (server probe) and 10 (sticker catalog).
 
@@ -560,7 +560,7 @@ def run_variant(
     decoder: Callable[[bytes], object],
     send_content_type: bool,
 ) -> bool:
-    label = "WeKit Content-Type" if send_content_type else "FunBox no Content-Type"
+    label = "X Content-Type" if send_content_type else "FunBox no Content-Type"
     try:
         result = call(
             session,

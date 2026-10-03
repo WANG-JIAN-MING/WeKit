@@ -16,7 +16,7 @@ pub const TELEGRAM_REQUEST_DISCOVER: u8 = 0x01;
 pub const TELEGRAM_REQUEST_COPY_DATABASE: u8 = 0x02;
 pub const TELEGRAM_RESPONSE_OK: u8 = 0;
 pub const TELEGRAM_RESPONSE_ERROR: u8 = 1;
-pub const TELEGRAM_RESPONSE_DISABLED: u8 = 2; // WeKit target disabled
+pub const TELEGRAM_RESPONSE_DISABLED: u8 = 2; // X target disabled
 
 // ── Private IO helpers ────────────────────────────────────────────────────────
 

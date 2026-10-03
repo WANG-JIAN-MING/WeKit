@@ -366,7 +366,7 @@ class MainActivity : ComponentActivity() {
                     title = {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
-                                text = BuildConfig.TAG,
+                                text = BuildConfig.DISPLAY_NAME,
                                 style = MaterialTheme.typography.titleLarge
                             )
                             Text(
@@ -809,7 +809,7 @@ class MainActivity : ComponentActivity() {
                 LinkCard(
                     icon = GitHubIcon,
                     title = stringResource(R.string.brand_github),
-                    subtitle = "Ujhhgtg/WeKit",
+                    subtitle = "X",
                     onClick = { onUrlClick("https://github.com/Ujhhgtg/WeKit") }
                 )
                 LinkCard(
@@ -826,7 +826,7 @@ class MainActivity : ComponentActivity() {
                     title = { Text(text = stringResource(R.string.module_app_about_title)) },
                     text = {
                         Column {
-                            Text(stringResource(R.string.module_app_about_description, BuildConfig.TAG))
+                            Text(stringResource(R.string.module_app_about_description, BuildConfig.DISPLAY_NAME))
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(stringResource(R.string.module_app_about_version, BuildConfig.VERSION_NAME))
                             Text(stringResource(R.string.module_app_about_version_code, BuildConfig.VERSION_CODE))

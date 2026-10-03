@@ -48,7 +48,7 @@ object NativeLoader {
                 requireNotNull(File(StartupInfo.modulePath).parentFile),
                 "lib/$instructionSet",
             ).also {
-                require(it.isDirectory) { "installed WeKit native-library directory is unavailable: $it" }
+                require(it.isDirectory) { "installed X native-library directory is unavailable: $it" }
             }
             for (name in listOf("androidx.graphics.path", "dexkit", "wekit_native")) {
                 System.load(installedNativeLibrary(name).absolutePath)
@@ -84,7 +84,7 @@ object NativeLoader {
 
     private fun installedNativeArtifact(name: String): File {
         val directory = installedNativeLibraryDir
-            ?: error("packaged $name requires an installed WeKit APK")
+            ?: error("packaged $name requires an installed X APK")
         return File(directory, "lib$name.so")
     }
 }

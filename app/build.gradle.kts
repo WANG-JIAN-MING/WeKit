@@ -47,6 +47,7 @@ android {
         }
 
         buildConfigField("String", "TAG", "\"WeKit\"")
+        buildConfigField("String", "DISPLAY_NAME", "\"X\"")
         buildConfigField("long", "BUILD_TIMESTAMP", "${System.currentTimeMillis()}L")
     }
 

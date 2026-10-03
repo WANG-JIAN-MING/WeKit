@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 
 /**
- * A context for accessing WeKit resources only.
+ * A context for accessing X resources only.
  *
  * Do not use it for an Activity, windows, Activity Result, SAF, system services, or third-party
  * UI construction.

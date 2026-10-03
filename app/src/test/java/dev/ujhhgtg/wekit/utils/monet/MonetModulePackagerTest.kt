@@ -42,7 +42,7 @@ class MonetModulePackagerTest {
             assertTrue("name=微信莫奈引擎 (X)" in moduleProp)
             assertTrue("version=8.0.77 (3100)" in moduleProp)
             assertTrue("versionCode=3100" in moduleProp)
-            assertTrue("description=为微信 8.0.77 启用动态壁纸取色, 由 WeKit 在运行时生成" in moduleProp)
+            assertTrue("description=为微信 8.0.77 启用动态壁纸取色, 由 X 在运行时生成" in moduleProp)
             val customize = zip.getInputStream(zip.getEntry("customize.sh")).bufferedReader().readText()
             assertTrue("WeChat, now with superpowers" in customize)
             assertTrue("在「超级用户」中选择「微信」, 关闭「卸载模块」选项" in customize)

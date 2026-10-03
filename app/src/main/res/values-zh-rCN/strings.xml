@@ -363,7 +363,7 @@
     <string name="config_clearing">正在清除…</string>
     <string name="config_clear_success">清除成功!</string>
     <string name="cleanup_legacy_dialog_title">清理旧数据</string>
-    <string name="cleanup_legacy_dialog_message">确定删除迁移后保留在旧位置的 WeKit 文件吗？当前模块数据不会受到影响。</string>
+    <string name="cleanup_legacy_dialog_message">确定删除迁移后保留在旧位置的模块文件吗？当前模块数据不会受到影响。</string>
     <string name="cleanup_legacy_success">旧数据清理成功!</string>
     <string name="update_available_title">检测到新版本</string>
     <string name="update_available_message">当前版本: %1$s\n新版本: %2$s\n是否下载并安装?</string>
@@ -2707,7 +2707,7 @@
     </plurals>
     <string name="contacts_detect_stop">终止</string>
     <string name="contacts_detect_back">返回</string>
-    <string name="contacts_detect_suggested_label">WeKit_单删好友_%1$s</string>
+    <string name="contacts_detect_suggested_label">X_单删好友_%1$s</string>
     <string name="contacts_detect_mark_label">标记标签</string>
     <string name="contacts_detect_delete_all">全部删除</string>
     <string name="contacts_hide_restored">已恢复隐藏联系人</string>

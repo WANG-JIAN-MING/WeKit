@@ -733,7 +733,7 @@ jobs:
           echo "Generated update.json:"
           cat artifacts/update.json
 
-      - name: Create CI release on WeKit and upload artifacts
+      - name: Create CI release on X and upload artifacts
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           COMMIT_SHA: ${{ github.sha }}
