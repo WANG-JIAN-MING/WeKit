@@ -26,7 +26,7 @@ object MonetApkSigner {
         val keyPair = kpg.generateKeyPair()
 
         val now = System.currentTimeMillis()
-        val dn = org.bouncycastle.asn1.x500.X500Name("CN=XXX Monet Overlay")
+        val dn = org.bouncycastle.asn1.x500.X500Name("CN=X Monet Overlay")
         val notBefore = Date(now - 24L * 60 * 60 * 1000)
         val notAfter = Date(now + 30L * 365 * 24 * 60 * 60 * 1000)
         val certBuilder = JcaX509v3CertificateBuilder(
@@ -41,7 +41,7 @@ object MonetApkSigner {
         val cert: X509Certificate = JcaX509CertificateConverter()
             .getCertificate(certBuilder.build(contentSigner))
         val signerConfig = AndroidApkSigner.SignerConfig.Builder(
-            "XXXMonet",
+            "XMonet",
             KeyConfig.Jca(keyPair.private),
             listOf(cert),
         ).build()

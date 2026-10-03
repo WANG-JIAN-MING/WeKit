@@ -32,9 +32,9 @@ object MonetModulePackager {
             fun add(name: String, text: String) = add(zip, name, text.toByteArray())
             add(
                 "module.prop",
-                "id=wekit-monet-engine\nname=微信莫奈引擎 (XXX)\n" +
+                "id=wekit-monet-engine\nname=微信莫奈引擎 (X)\n" +
                     "version=$versionName ($versionCode)\nversionCode=$versionCode\nauthor=Ujhhgtg\n" +
-                    "description=为微信 $versionName 启用动态壁纸取色, 由 XXX 在运行时生成\n",
+                    "description=为微信 $versionName 启用动态壁纸取色, 由 X 在运行时生成\n",
             )
             add("customize.sh", CUSTOMIZE_SCRIPT)
             add("META-INF/com/google/android/update-binary", UPDATE_BINARY)
@@ -157,7 +157,7 @@ ui_print '            | | /| / / _ \/ ,<  / / __/'
 ui_print '            | |/ |/ /  __/ /| |/ / /_'
 ui_print '            |__/|__/\___/_/ |_/_/\__/'
 ui_print " "
-ui_print "       [XXX] WeChat, now with superpowers"
+ui_print "       [X] WeChat, now with superpowers"
 ui_print " "
 ui_print "已安装生成时选定的莫奈覆盖。"
 ui_print " "

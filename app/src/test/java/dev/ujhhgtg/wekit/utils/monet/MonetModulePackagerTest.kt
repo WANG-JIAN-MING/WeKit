@@ -39,7 +39,7 @@ class MonetModulePackagerTest {
                 zip.entries().asSequence().map { it.name }.toSet(),
             )
             val moduleProp = zip.getInputStream(zip.getEntry("module.prop")).bufferedReader().readText()
-            assertTrue("name=微信莫奈引擎 (XXX)" in moduleProp)
+            assertTrue("name=微信莫奈引擎 (X)" in moduleProp)
             assertTrue("version=8.0.77 (3100)" in moduleProp)
             assertTrue("versionCode=3100" in moduleProp)
             assertTrue("description=为微信 8.0.77 启用动态壁纸取色, 由 WeKit 在运行时生成" in moduleProp)

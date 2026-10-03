@@ -16,9 +16,9 @@ else
 fi
 
 [ "$ARCH" = arm64 ] || abort "! 不支持的平台 / Unsupported platform: $ARCH"
-ui_print "- 正在检查 XXX 二合一 APK / Checking XXX dual-format APK"
-unzip -t "$ZIPFILE" >/dev/null 2>&1 || abort "! XXX APK 已损坏 / Corrupt XXX APK"
-unzip -l "$ZIPFILE" > "$TMPDIR/wekit-apk-entries" || abort "! 无法列出 XXX APK 内容 / Cannot list XXX APK"
+ui_print "- 正在检查 X 二合一 APK / Checking X dual-format APK"
+unzip -t "$ZIPFILE" >/dev/null 2>&1 || abort "! X APK 已损坏 / Corrupt X APK"
+unzip -l "$ZIPFILE" > "$TMPDIR/wekit-apk-entries" || abort "! 无法列出 X APK 内容 / Cannot list X APK"
 
 # Use a fixed list so Android resources and DEX are never unpacked here.
 for entry in module.prop customize.sh uninstall.sh sepolicy.rule config.sh action.sh \
@@ -64,9 +64,9 @@ fi
 mv -f "$TMPDIR/wekit-zygisk.so" "$MODPATH/zygisk/arm64-v8a.so" ||
   abort "! 无法写入 Zygisk 原生库 / Cannot publish Zygisk library"
 
-ui_print "- 正在保存原始 XXX APK / Storing the original XXX APK"
-cp "$ZIPFILE" "$MODPATH/module.apk.tmp" || abort "! 无法复制 XXX APK / Cannot copy XXX APK"
-mv -f "$MODPATH/module.apk.tmp" "$MODPATH/module.apk" || abort "! 无法写入 XXX APK / Cannot publish XXX APK"
+ui_print "- 正在保存原始 X APK / Storing the original X APK"
+cp "$ZIPFILE" "$MODPATH/module.apk.tmp" || abort "! 无法复制 X APK / Cannot copy X APK"
+mv -f "$MODPATH/module.apk.tmp" "$MODPATH/module.apk" || abort "! 无法写入 X APK / Cannot publish X APK"
 # Only remove obsolete files in the installation candidate, never in the active module.
 rm -rf "$MODPATH/payload"
 rm -f "$MODPATH/post-fs-data.sh" "$MODPATH/service.sh" "$MODPATH/verify.sh"

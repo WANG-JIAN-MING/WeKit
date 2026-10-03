@@ -1,7 +1,7 @@
 id=wekit_zygisk
-name=XXX
+name=X
 version=@VERSION_NAME@
 versionCode=@VERSION_CODE@
 author=ujhhgtg
-description=XXX (@VARIANT@) — Zygisk mode. Manage per-Android-user injection targets from the KernelSU WebUI.
+description=X (@VARIANT@) — Zygisk mode. Manage per-Android-user injection targets from the KernelSU WebUI.
 #updateJson=
