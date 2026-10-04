@@ -363,7 +363,7 @@
     <string name="config_clearing">正在清除…</string>
     <string name="config_clear_success">清除成功!</string>
     <string name="cleanup_legacy_dialog_title">清理舊資料</string>
-    <string name="cleanup_legacy_dialog_message">確定刪除遷移後保留在舊位置的模組檔案嗎？目前模組資料不會受到影響。</string>
+    <string name="cleanup_legacy_dialog_message">確定刪除遷移後保留在舊位置的 X 檔案嗎？目前模組資料不會受到影響。</string>
     <string name="cleanup_legacy_success">舊資料清理成功!</string>
     <string name="update_available_title">檢測到新版本</string>
     <string name="update_available_message">當前版本: %1$s\n新版本: %2$s\n是否下載並安裝?</string>

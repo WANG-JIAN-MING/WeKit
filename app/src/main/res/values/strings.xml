@@ -394,7 +394,7 @@
     <string name="config_clearing">Clearing…</string>
     <string name="config_clear_success">Cleared successfully!</string>
     <string name="cleanup_legacy_dialog_title">Clean up old data</string>
-    <string name="cleanup_legacy_dialog_message">Delete the legacy module storage locations left after migration? Current module data will not be changed.</string>
+    <string name="cleanup_legacy_dialog_message">Delete the legacy X storage locations left after migration? Current module data will not be changed.</string>
     <string name="cleanup_legacy_success">Old data cleaned successfully!</string>
     <string name="update_available_title">New version available</string>
     <string name="update_available_message">Current version: %1$s\nNew version: %2$s\nDownload and install it?</string>
