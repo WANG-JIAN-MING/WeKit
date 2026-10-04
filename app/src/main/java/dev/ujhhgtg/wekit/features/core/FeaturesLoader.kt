@@ -33,7 +33,9 @@ object FeaturesLoader {
 
     fun loadFeatures() {
         val allFeatures = FeaturesProvider.ALL_FEATURES
-        allFeatures.filterIsInstance<SwitchFeature>().forEach(SwitchFeature::loadPersistedState)
+        val currentProcess = TargetProcesses.currentType
+        val processFeatures = allFeatures.filter { currentProcess in it.targetProcesses }
+        processFeatures.filterIsInstance<SwitchFeature>().forEach(SwitchFeature::loadPersistedState)
         if (TargetProcesses.isInMain) {
             // Migrate even when grouping is disabled or its Dex cache needs rebuilding. Reading
             // legacy style later could mistake a new beauty toggle for the user's pre-upgrade choice.
@@ -42,9 +44,9 @@ object FeaturesLoader {
 
         val safeMode = SafeMode.isEnabled
         val featuresToStart = if (safeMode) {
-            allFeatures.filterIsInstance<ApiFeature>()
+            processFeatures.filterIsInstance<ApiFeature>()
         } else {
-            allFeatures
+            processFeatures
         }
         if (safeMode) {
             WeLogger.i(

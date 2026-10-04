@@ -81,9 +81,11 @@ object StartupAgent {
             WeLauncher.init(application)
         }
 
-        runCatching {
-            application.dataDir.toPath().resolve("app_qqprotect").deleteRecursively()
-        }.onFailure { WeLogger.e(TAG, "failed to delete app_qqprotect", it) }
+        if (TargetProcesses.isInMain) {
+            runCatching {
+                application.dataDir.toPath().resolve("app_qqprotect").deleteRecursively()
+            }.onFailure { WeLogger.e(TAG, "failed to delete app_qqprotect", it) }
+        }
 
         // Only commit after every required startup phase completes. The caller
         // already logs a thrown failure, and a later lifecycle callback can retry.
